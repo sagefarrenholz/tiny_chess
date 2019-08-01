@@ -1,2 +1,3 @@
 ﻿  chess.c
+E:\repos\chess\src\chess.c(50,12): warning C4101:  'currtime': unreferenced local variable
   chess.vcxproj -> E:\repos\chess\bin\chess.exe
