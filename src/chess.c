@@ -1,4 +1,4 @@
-#include "chesss.h" 
+#include "chess.h" 
 
 typedef struct Player {
 
@@ -44,26 +44,40 @@ int main() {
 			//Print title screen here
 
 			//Command / Game loop.
-			char* cmdbuff = (char*)calloc(64, sizeof(char));
+			
 			while (1) {
-				time_t prevtime = time(NULL);	//Get current time.
-				time_t currtime;
+				//Command buffer
+				char* cmdbuff = (char*)calloc(256, sizeof(char));
+				//time_t prevtime = time(NULL);	//Get current time.
+				//time_t currtime;
 				//If deltatime >= 1 sec redraw turn clock; 1hz.
-				int arg; //Number of command arguments.
+				
+				//Render here
+				
+				char* com = NULL; //Main command
+				char** arg = NULL; //Command arguments.
+				int argc = 0; //Argument amount;
 				printf("Type \"help\" for a list of commands\n>");
 				#pragma warning(disable:4996)
-				while (arg = scanf("%64s", cmdbuff)) {
-
-				
-					arg--;
-				} 
-
+				fgets(cmdbuff, 256, stdin);
+				while (strtok())
+				for (size_t i = 0; i < strlen(cmdbuff); i++) {
+					if (cmdbuff[i] == '\n') break;
+					if (cmdbuff[i] == ' ') continue;
+					if (!com) {
+						printf("command %c", cmdbuff[i]);
+					} else {
+						printf("arguement %c", cmdbuff[i]);
+					}
+						
+				}
+				free(cmdbuff);
 			}
 
-
+			
 			//End Sequence
-			free(cmdbuff);
 		}
+	free(player);
 	return 0;
 }
 

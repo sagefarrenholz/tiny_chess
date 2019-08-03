@@ -1,3 +1,4 @@
 ﻿  chess.c
-E:\repos\chess\src\chess.c(50,12): warning C4101:  'currtime': unreferenced local variable
+E:\repos\chess\src\chess.c(63,34): warning C4013:  'strlen' undefined; assuming extern returning int
+E:\repos\chess\src\chess.c(63,26): warning C4018:  '<': signed/unsigned mismatch
   chess.vcxproj -> E:\repos\chess\bin\chess.exe
