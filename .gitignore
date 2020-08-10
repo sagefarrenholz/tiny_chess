@@ -3,3 +3,5 @@ chess.sln
 chess.vcxproj
 chess.vcxproj.filters
 chess.vcxproj.user
+arch
+bin
