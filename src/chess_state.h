@@ -8,6 +8,7 @@
 #include "chess_constructs.h"
 #include "chess_player.h"
 #include "chess_piece.h"
+#include "chess_view.h"
 
 #ifndef POSITION_INDEX
 #define POSITION_INDEX 1
@@ -18,6 +19,7 @@
 typedef struct Chess_State {
 	Chess_Piece* board[64];
 	Chess_Player* players[2];	
+	Chess_View* view;
 	int turn_count;	
 	Color next_turn;
 	bool black_is_check, white_is_check;	     
@@ -25,8 +27,8 @@ typedef struct Chess_State {
 	// TODO add game history to rewind game
 } Chess_State;
 
-// Intialize a chess state, board may be null
-Chess_State* chess_state_init(Chess_Piece* board[64]);
+// Intialize a chess state, if headless is true, no gui will be generated.
+Chess_State* chess_state_init(bool headless);
 
 // Deletes a chess state
 void chess_state_destroy(Chess_State* state);

@@ -8,11 +8,8 @@
 
 int main(int argc, char** argv) {
 	
-	initscr();
-	printw("Test!");
-	refresh();
-	getch();
-	endwin();
+	Chess_State* state = chess_state_init(false);	
+	chess_state_destroy(state);
 
 	return EXIT_SUCCESS;
 }

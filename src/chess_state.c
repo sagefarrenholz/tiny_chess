@@ -12,7 +12,7 @@
 
 typedef unsigned u;
 
-Chess_State* chess_state_init(Chess_Piece* board[64]) {
+Chess_State* chess_state_init(bool headless) {
 	
 	Chess_State* state = (Chess_State*) malloc(sizeof(Chess_State));
 	
@@ -21,7 +21,6 @@ Chess_State* chess_state_init(Chess_Piece* board[64]) {
 		exit(-1);
 	}
 
-	if (board == NULL) {
 	
 		// Set starting positions
 		Chess_Piece* start_pos[64] = {
@@ -45,12 +44,6 @@ Chess_State* chess_state_init(Chess_Piece* board[64]) {
 		};
 
 		memcpy(state->board, start_pos, sizeof(Chess_Piece*) * 64);
-
-	} else {
-
-		memcpy(state->board, board, sizeof(Chess_Piece*) * 64);
-	}
-
 
 	// Init and attach players
 	Chess_Player* white_player = chess_player_init(WHITE);
@@ -77,7 +70,21 @@ Chess_State* chess_state_init(Chess_Piece* board[64]) {
 	// White moves first
 	state->next_turn = WHITE;
 
+	// If not in headless mode, create a chess view object, attach it.
+	if (!headless) {
+		Chess_View* _view = chess_view_init();
+		state->view = _view;
+	}
+
 	return state;
+}
+
+void chess_state_destroy(Chess_State* state) {
+	chess_view_destroy(state->view);
+	chess_player_destroy(state->players[0]);
+	chess_player_destroy(state->players[1]);
+	for (int i = 0; i < 64; i++) chess_piece_destroy(state->board[i]);
+	free(state);
 }
 
 inline static u coortoidx(u x, u y){ return (x - POSITION_INDEX) + (y - POSITION_INDEX) * 8; }

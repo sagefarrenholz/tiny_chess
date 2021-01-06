@@ -7,5 +7,6 @@
 #include "chess_state.h"
 #include "chess_piece.h"
 #include "chess_player.h"
+#include "chess_view.h"
 
 #endif 
