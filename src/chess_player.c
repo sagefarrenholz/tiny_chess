@@ -1,4 +1,4 @@
-/* Copyright (C) 2021, Sage Farrenholz */
+/* Copyright (c) 2021, Sage Farrenholz */
 
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,7 +1,9 @@
+/* Copyright (c) 2021, Sage Farrenholz */
+
 #ifndef CHESS_PIECE_H
 #define CHESS_PIECE_H
 
-#include "chess.h"
+#include "chess_constructs.h"
 
 typedef struct Chess_Piece {
 	Color color;

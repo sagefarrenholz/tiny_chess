@@ -1,9 +1,11 @@
+/* Copyright (c) 2021, Sage Farrenholz */
+
 #ifndef CHESS_PLAYER_H
 #define CHESS_PLAYER_H
 
 #include <stdbool.h>
 
-#include "chess.h"
+#include "chess_constructs.h"
 #include "chess_piece.h"
 
 // Shouldn't be possible to acquire more than 30 pieces

@@ -1,11 +1,11 @@
-/* Sage Farrenholz © 2020 */
+/* Copyright (c) 2021, Sage Farrenholz */
 
 #ifndef GAME_STATE_H
 #define GAME_STATE_H
 
 #include <stdbool.h>
 
-#include "chess.h"
+#include "chess_constructs.h"
 #include "chess_player.h"
 #include "chess_piece.h"
 
