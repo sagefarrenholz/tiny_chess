@@ -35,7 +35,6 @@ Chess_View* chess_view_init() {
 	init_pair(WPLAYER_ON_BSQUARE, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(BPLAYER_ON_WSQUARE, COLOR_RED, COLOR_WHITE);
 	init_pair(BPLAYER_ON_BSQUARE, COLOR_RED, COLOR_BLACK);
-
 	
 	{
 		// load piece graphics 
@@ -66,7 +65,7 @@ Chess_View* chess_view_init() {
 	// draw board
 	_chess_view_print_board(view);
 	refresh();
-	getch();
+	endwin();	
 
 	return view;
 }
@@ -108,7 +107,21 @@ static void _chess_view_print_board(Chess_View* view) {
 }
 
 void chess_view_print_piece_idx(Chess_View* view, Chess_Piece* piece, int idx) {
-			
-
-
+	unsigned* conv = idxtocoor(idx);
+	Chess_Graphic* piece_graphic = view->piece_graphics[piece->type];	
+	int x = conv[0] * TILE_WIDTH, y = conv[1] * TILE_HEIGHT;
+	for (int i = 0; i < piece_graphic->num_characters; i++) {
+		char tmp_char = piece_graphic->characters[i];
+		attron(COLOR_PAIR(WPLAYER_ON_WSQUARE));
+		if (tmp_char == '\n') {
+			y++;
+			x=conv[0] * TILE_WIDTH;
+		} else {
+			mvaddch(y, x, tmp_char);
+			x++;
+		}
+		attroff(COLOR_PAIR(BPLAYER_ON_WSQUARE));
+	}
+	refresh();
+	free(conv);
 }

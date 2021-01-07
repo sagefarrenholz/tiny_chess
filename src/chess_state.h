@@ -41,6 +41,9 @@ Chess_Player* chess_state_get_next_player(Chess_State* state);
 // Retrieve a player by color
 Chess_Player* chess_state_get_player_by_color(Chess_State* state, Color player_color);
 
+// If a view is attached this chess state will become interactive.
+void chess_state_make_interactive(Chess_State* state);
+
 // Unequivocally sets a piece (without error), use empty for setting empty space
 void chess_state_set_piece(Chess_State* state, unsigned x, unsigned y, Chess_Piece);
 

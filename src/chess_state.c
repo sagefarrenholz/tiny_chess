@@ -96,10 +96,16 @@ void chess_state_destroy(Chess_State* state) {
 
 
 Chess_Piece* chess_state_get_piece(Chess_State* state, u x, u y) {
+	
+	if (state == NULL) return NULL;	
+	
 	return state->board[coortoidx(x, y)];
 }
 
 Chess_Player* chess_state_get_player_by_color(Chess_State* state, Color player_color) {
+
+	if (state == NULL) return NULL;
+
 	if (state->players[0]->color == player_color) {
 		return state->players[0];
 	} else {
@@ -108,6 +114,9 @@ Chess_Player* chess_state_get_player_by_color(Chess_State* state, Color player_c
 }
 
 Chess_Player* chess_state_get_next_player(Chess_State* state) {
+
+	if (state == NULL) return NULL;
+
 	if (state->next_turn == BLACK) {
 		return chess_state_get_player_by_color(state, BLACK);
 	} else {
@@ -116,6 +125,8 @@ Chess_Player* chess_state_get_next_player(Chess_State* state) {
 }
 
 Chess_Error chess_state_move_piece(Chess_State* state, u x1, u y1, u x2, u y2) {
+
+	if (state == NULL) return G_ERROR_INVALID_PARAMETERS;
 
 	// Ensure valid positions
 	if (x1 > 63 + POSITION_INDEX || x1 < POSITION_INDEX) return G_ERROR_INVALID_PARAMETERS; 
@@ -133,4 +144,12 @@ Chess_Error chess_state_move_piece(Chess_State* state, u x1, u y1, u x2, u y2) {
 	}
 
 	return SUCCESS;
+}
+
+void chess_state_make_interactive(Chess_State* state) {
+	
+	if (state == NULL) return;
+
+		
+
 }

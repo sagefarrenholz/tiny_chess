@@ -11,6 +11,7 @@
 #include <string.h>
 
 unsigned coortoidx(unsigned x, unsigned y);
+unsigned* idxtocoor(unsigned idx);
 
 typedef enum Color {
 	BLACK = 0x00u	,
