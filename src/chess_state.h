@@ -10,10 +10,6 @@
 #include "chess_piece.h"
 #include "chess_view.h"
 
-#ifndef POSITION_INDEX
-#define POSITION_INDEX 1
-#endif
-
 //typedef Chess_Piece Chess_Board[64];
 
 typedef struct Chess_State {

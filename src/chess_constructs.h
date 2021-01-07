@@ -3,20 +3,30 @@
 #ifndef CHESS_CONSTRUCTS_H
 #define CHESS_CONSTRUCTS_H
 
+#ifndef POSITION_INDEX
+#define POSITION_INDEX 1
+#endif
+
+#include <ctype.h>
+#include <string.h>
+
+unsigned coortoidx(unsigned x, unsigned y);
+
 typedef enum Color {
 	BLACK = 0x00u	,
 	WHITE = 0x80u	,
 } Color;
 
 typedef enum Piece_Type {
-	EMPTY = 0x00u	,
-	PAWN = 0x01u	,
-	ROOK = 0x02u	,
-	KNIGHT = 0x03u	,
-	BISHOP = 0x04u	,
-	QUEEN = 0x05u	,
-	KING = 0x06u	,
+	PAWN = 0x00u	,
+	ROOK = 0x01u	,
+	KNIGHT = 0x02u	,
+	BISHOP = 0x03u	,
+	QUEEN = 0x04u	,
+	KING = 0x05u	,
 } Piece_Type;
+
+Piece_Type string_to_piece(char* type_string); 
 
 typedef enum Chess_Error {
 //  General Errors

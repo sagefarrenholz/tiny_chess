@@ -1,8 +1,10 @@
 SRC=$(wildcard *.c)
-LIBS="ncurses"
+LIBS=ncurses
+
+OUTPUT=$2
 
 release: $(SRC)
-	gcc -o chess $(SRC) -l$(LIBS)
+	gcc -O3 -o $(OUTPUT) $(SRC) -l$(LIBS)
 
 debug: $(SRC)
-	gcc -g -o chess $(SRC) -l$(LIBS)
+	gcc -g -o $(OUTPUT) $(SRC) -l$(LIBS)

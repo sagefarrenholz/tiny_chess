@@ -6,20 +6,21 @@
 #include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 #define WPLAYER_ON_WSQUARE 0
 #define WPLAYER_ON_BSQUARE 1
 #define BPLAYER_ON_WSQUARE 2
 #define BPLAYER_ON_BSQUARE 3
 
-#define TILE_WIDTH 18
+#define TILE_WIDTH 19
 #define TILE_HEIGHT 8
 
 static void _chess_view_print_board(Chess_View*);
 
 Chess_View* chess_view_init() {
 
-	Chess_View* view = NULL;
+	Chess_View* view = (Chess_View*) malloc(sizeof(Chess_View));
 	
 	// ncurses setup
 	initscr();
@@ -34,7 +35,34 @@ Chess_View* chess_view_init() {
 	init_pair(WPLAYER_ON_BSQUARE, COLOR_YELLOW, COLOR_BLACK);
 	init_pair(BPLAYER_ON_WSQUARE, COLOR_RED, COLOR_WHITE);
 	init_pair(BPLAYER_ON_BSQUARE, COLOR_RED, COLOR_BLACK);
+
 	
+	{
+		// load piece graphics 
+		char piece_graphics_filename[64] = "../art/piece/pawn.txt";
+		FILE* piece_graphics_file = fopen(piece_graphics_filename, "r");
+
+		if (piece_graphics_file != NULL) {
+			Chess_Graphic* tmp_graphic;
+
+			// read in each piece graphic
+			for (int i = 0; i < NUM_PIECE_GRAPHICS; i++) {
+				tmp_graphic = chess_graphic_init(piece_graphics_file);
+				if (string_to_piece(tmp_graphic->label) < 6) {
+					view->piece_graphics[string_to_piece(tmp_graphic->label)] = tmp_graphic;		
+				} else {
+					chess_graphic_destroy(tmp_graphic);
+				}
+			}
+			printf("First label: %s\n", view->piece_graphics[0]->label);
+
+			// close piece graphics file
+			fclose(piece_graphics_file);
+		} else {
+			fprintf(stderr, "Chess_Error: could not open file containing piece graphics at %s\n", piece_graphics_filename);
+		}
+	}
+
 	// draw board
 	_chess_view_print_board(view);
 	refresh();
@@ -43,7 +71,13 @@ Chess_View* chess_view_init() {
 	return view;
 }
 
-void chess_view_destroy(Chess_View* state) {
+void chess_view_destroy(Chess_View* view) {
+	for (int i = 0; i < NUM_PIECE_GRAPHICS; i++) {
+		if (view->piece_graphics[i] != NULL) {
+			chess_graphic_destroy(view->piece_graphics[i]);
+		}
+	}
+	free(view);
 	endwin();
 }
 
@@ -57,7 +91,7 @@ static void _chess_view_print_tile(short color_pair_number, int x_offset, int y_
 	}
 }
 
-static void _chess_view_print_board(Chess_View* state) {
+static void _chess_view_print_board(Chess_View* view) {
 	Color tile_color = WHITE;
 	for (int tile_row = 0; tile_row < 8; tile_row++) {
 		for (int tile_col = 0; tile_col < 8; tile_col++) {
@@ -73,3 +107,8 @@ static void _chess_view_print_board(Chess_View* state) {
 	}
 }
 
+void chess_view_print_piece_idx(Chess_View* view, Chess_Piece* piece, int idx) {
+			
+
+
+}
